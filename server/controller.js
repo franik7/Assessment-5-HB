@@ -230,8 +230,9 @@ module.exports = {
 
         .then((dbRes) => {
             res.status(200).send(dbRes[0])
+            
          })
-        .catch(err => console.log('error seeding DB', err))
+        .catch(err => console.log('error getting countries', err))
     },
     createCity: (req, res) => {
 
@@ -244,7 +245,23 @@ module.exports = {
 
         .then((dbRes) => {
             res.status(200).send(dbRes[0])
+         
          })
-        .catch(err => console.log('error seeding DB', err))
-    }
+        .catch(err => console.log('error creating city', err))
+    },
+
+    getCities: (req, res) => {
+        query = `select cit.city_id, cit.name as city, rating, cou.country_id, cou.name as country from cities as cit join countries as cou
+        on cit.country_id = cou.country_id;
+        `
+        sequelize.query(query)
+
+        .then((dbRes) => {
+            res.status(200).send(dbRes[0])
+         
+         })
+        .catch(err => console.log('error getting cities', err))
+    },
+    
+
 }
