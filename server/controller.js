@@ -218,6 +218,12 @@ module.exports = {
             ('Yemen'),
             ('Zambia'),
             ('Zimbabwe');
+            
+            insert into cities (name, rating, country_id)
+            values ('New York', 5, 187),
+            ('Philadelphia', 4, 187),
+            ('Boston', 3, 187)
+            ;
         `).then(() => {
             console.log('DB seeded!')
             res.sendStatus(200)
@@ -252,7 +258,8 @@ module.exports = {
 
     getCities: (req, res) => {
         query = `select cit.city_id, cit.name as city, rating, cou.country_id, cou.name as country from cities as cit join countries as cou
-        on cit.country_id = cou.country_id;
+        on cit.country_id = cou.country_id
+        order by rating desc;
         `
         sequelize.query(query)
 
