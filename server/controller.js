@@ -232,6 +232,19 @@ module.exports = {
             res.status(200).send(dbRes[0])
          })
         .catch(err => console.log('error seeding DB', err))
+    },
+    createCity: (req, res) => {
 
+        const { name, rating, countryId } = req.body
+
+        query = `insert into cities (name, rating, country_id)
+        values ('${name}', ${rating}, ${countryId});
+        `
+        sequelize.query(query)
+
+        .then((dbRes) => {
+            res.status(200).send(dbRes[0])
+         })
+        .catch(err => console.log('error seeding DB', err))
     }
 }
