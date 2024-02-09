@@ -1,0 +1,30 @@
+
+pets {
+	id int pk
+	species_id text > species.id
+	name text
+	color text
+	weight int
+	height int
+	vaccinated boolean
+	adopted boolean
+	owner_id int > owner.owner_id
+}
+
+owner {
+	id int pk
+	name text
+	address text
+	adopted_pet_id int > pets.id
+}
+
+species {
+	id int pk
+	species_type text
+}
+
+pet_location {
+	location text pk
+	pet_id int > pets.id
+}
+
